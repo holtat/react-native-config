@@ -4,14 +4,11 @@ require "json"
 
 # pick a custom env file if set
 if File.exists?("/tmp/envfile")
-  temp_env = true
+  custom_env = true
   file = File.read("/tmp/envfile").strip
-elsif not ARGV[0].nil? and not ARGV[0].empty?
-  temp_env = false
-  file = ARGV[0]
 else
-  temp_env = false
-  file = ".env"
+  custom_env = false
+  file = ENV["ENVFILE"] || ".env"
 end
 
 puts "Reading env from #{file}"
@@ -53,7 +50,7 @@ info_plist_defines_objc = dotenv.map { |k, v| %Q(#define __RN_CONFIG_#{k}  #{v})
 path = File.join(ENV["BUILD_DIR"], "GeneratedInfoPlistDotEnv.h")
 File.open(path, "w") { |f| f.puts info_plist_defines_objc }
 
-if temp_env
+if custom_env
   File.delete("/tmp/envfile")
 end
 

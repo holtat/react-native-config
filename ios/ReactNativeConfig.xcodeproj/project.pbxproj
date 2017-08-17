@@ -144,7 +144,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "./ReactNativeConfig/BuildDotenvConfig.ruby \"${ENVFILE}\"";
+			shellScript = ./ReactNativeConfig/BuildDotenvConfig.ruby;
 		};
 /* End PBXShellScriptBuildPhase section */
 
